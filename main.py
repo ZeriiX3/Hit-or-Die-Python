@@ -45,6 +45,9 @@ while game_running:
         bullet_courbe.mouvement_courbe()
     jeu.joueur.all_bullets_courbe.draw(screen)
 
+    # Afficher l'image des monstres
+    jeu.all_monstres.draw(screen)
+
 
 
     ####################################
@@ -53,7 +56,8 @@ while game_running:
     ####################################
 
 
-    # Evenement pygame
+    ################## Evenement pygame ##################
+
     for event in pygame.event.get():
         # Fermeture du jeu
         if event.type == pygame.QUIT:
@@ -73,7 +77,7 @@ while game_running:
                 print("Déplacement vers la gauche")
             # Si le joueur appuie sur ESP
             elif event.key == pygame.K_SPACE:
-                jeu.joueur.lancement()
+                jeu.joueur.lancement(jeu)
             # Si le joueur appuie sur ENTER
             elif event.key == pygame.K_RETURN:
                 jeu.joueur.lancement_courbe()

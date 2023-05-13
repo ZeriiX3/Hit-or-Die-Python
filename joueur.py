@@ -32,8 +32,8 @@ class Joueur(pygame.sprite.Sprite):
     def move_left(self):
         self.rect.x -= self.vitesse
 
-    def lancement(self):
-        bullet = Bullet(self)
+    def lancement(self, jeu):
+        bullet = Bullet(self, jeu)
         self.all_bullets.add(bullet)
 
     def lancement_courbe(self):
