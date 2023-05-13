@@ -52,7 +52,7 @@ while game_running:
         bullet.mouvement()
     jeu.joueur.all_bullets.draw(screen)
 
-    for bullet_courbe in jeu.joueur.all_bombe:   # Munitions sans trajectoire
+    for bullet_courbe in jeu.joueur.all_bombe:
         bullet_courbe.mouvement_courbe()
     jeu.joueur.all_bombe.draw(screen)
 

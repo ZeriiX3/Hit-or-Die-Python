@@ -1,5 +1,6 @@
 import pygame
 import numpy
+import math
 
 
 
@@ -42,15 +43,19 @@ class Bullet(pygame.sprite.Sprite):     # Munitions sans trajectoire
 
 
 
-class Bombe(pygame.sprite.Sprite):     # Munitions avec trajectoire
+class Bombe(pygame.sprite.Sprite):
+    # Munitions avec trajectoire
+
 
     def __init__(self, joueur, jeu):
         super().__init__()
 
         # Statistiques des munitions
-        self.vitesse = 5
-        self.angle = 45
-        self.time = 0
+        self.vitesse = 8
+        self.angle = 60
+        self.time = -5
+        self.gravity =0.02# Gravité pour la trajectoire courbe
+
         # Charger l'image des munitions
         self.image = pygame.image.load("assets/bombe.png")
         self.image = pygame.transform.scale(self.image, (37, 37))
@@ -58,13 +63,26 @@ class Bombe(pygame.sprite.Sprite):     # Munitions avec trajectoire
         self.rect.x = joueur.rect.x + 108
         self.rect.y = joueur.rect.y - 6
 
-        self.joueur = joueur  # Pour pourvoir utiliser la class joueur dans la fonction mouvement()
-        self.jeu = jeu  # Pour pourvoir utiliser la class jeu dans la fonction mouvement()
+        self.joueur = joueur  # Pour pouvoir utiliser la classe joueur dans la fonction mouvement()
+        self.jeu = jeu  # Pour pouvoir utiliser la classe jeu dans la fonction mouvement()
 
+    def mouvement(self):
+        self.rect.x += self.vitesse
 
-    # Fonctions
+        # Si la bombe sort de l'écran, la détruire
+        if self.rect.y > self.jeu.hauteur_ecran or self.rect.x > self.jeu.largeur_ecran:
+            self.kill()
 
     def mouvement_courbe(self):
+        self.time += 1
+        # Calculer la position en fonction du temps et de l'angle
+        radian_angle = math.radians(self.angle)
+        self.rect.x += int(self.vitesse * math.cos(radian_angle))
+        self.rect.y -= int(self.vitesse * math.sin(radian_angle) - 0.5 * self.gravity * self.time ** 2)
+
+        # Si la bombe sort de l'écran, la détruire
+        if self.rect.y > self.jeu.hauteur_ecran or self.rect.x > self.jeu.largeur_ecran:
+            self.kill()
         """
         # Convertir l'angle en radians
         theta = numpy.radians(self.angle)
