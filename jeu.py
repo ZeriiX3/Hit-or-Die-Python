@@ -14,6 +14,7 @@ class Jeu:
         # Monstres
         self.all_monstres = pygame.sprite.Group()
         self.spawn_monstre()
+        self.spawn_monstre()
 
         # Touches
         self.key_pressed = {}

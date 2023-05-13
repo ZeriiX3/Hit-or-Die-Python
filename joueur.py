@@ -12,7 +12,6 @@ class Joueur(pygame.sprite.Sprite):
         # Statistiques du joueur
         self.hp = 100
         self.hp_max = 100
-        self.damage = 10
         self.vitesse = 3
         # Charger l'image du joueur + position
         self.image = pygame.image.load("assets/joueur.png")
