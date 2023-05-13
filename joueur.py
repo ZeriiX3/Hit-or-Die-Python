@@ -1,6 +1,6 @@
 import pygame
 from bullet import Bullet
-from bullet import Bullet_courbe
+from bullet import Bombe
 
 # JOUEUR
 
@@ -13,7 +13,7 @@ class Joueur(pygame.sprite.Sprite):
         self.hp = 100
         self.hp_max = 100
         self.damage = 10
-        self.vitesse = 10
+        self.vitesse = 3
         # Charger l'image du joueur + position
         self.image = pygame.image.load("assets/joueur.png")
         self.rect = self.image.get_rect()
@@ -21,21 +21,21 @@ class Joueur(pygame.sprite.Sprite):
         self.rect.y = 200
 
         self.all_bullets = pygame.sprite.Group()
-        self.all_bullets_courbe = pygame.sprite.Group()
+        self.all_bombe = pygame.sprite.Group()
 
 
     # Fonctions
 
-    def move_right(self):
-        self.rect.x += self.vitesse
+    def move_top(self):
+        self.rect.y -= self.vitesse
 
-    def move_left(self):
-        self.rect.x -= self.vitesse
+    def move_bot(self):
+        self.rect.y += self.vitesse
 
     def lancement(self, jeu):
         bullet = Bullet(self, jeu)
         self.all_bullets.add(bullet)
 
-    def lancement_courbe(self):
-        bullet_courbe = Bullet_courbe(self)
-        self.all_bullets_courbe.add(bullet_courbe)
+    def lancement_bombe(self, jeu):
+        bombe = Bombe(self, jeu)
+        self.all_bombe.add(bombe)

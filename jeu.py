@@ -2,6 +2,7 @@ import pygame
 from joueur import Joueur
 from monstre import Monstre
 
+
 # JEU
 
 class Jeu:
@@ -13,6 +14,9 @@ class Jeu:
         # Monstres
         self.all_monstres = pygame.sprite.Group()
         self.spawn_monstre()
+
+        # Touches
+        self.key_pressed = {}
 
 
     # Fonctions

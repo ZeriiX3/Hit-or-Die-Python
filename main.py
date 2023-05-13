@@ -1,5 +1,8 @@
 import pygame
+
+import joueur
 from jeu import Jeu
+
 
 
 
@@ -28,6 +31,14 @@ print("Le jeu commence")
 
 while game_running:
 
+    # Si le joueur appuie sur UP
+    if jeu.key_pressed.get(pygame.K_UP) and jeu.joueur.rect.y > 0:
+        jeu.joueur.move_top()
+    # Si le joueur appuie sur DOWN
+    elif jeu.key_pressed.get(pygame.K_DOWN)  and jeu.joueur.rect.y < 700:
+        jeu.joueur.move_bot()
+
+
     ############# AFFICHAGE #############
 
     # Affichage du background
@@ -41,9 +52,9 @@ while game_running:
         bullet.mouvement()
     jeu.joueur.all_bullets.draw(screen)
 
-    for bullet_courbe in jeu.joueur.all_bullets_courbe:   # Munitions sans trajectoire
+    for bullet_courbe in jeu.joueur.all_bombe:   # Munitions sans trajectoire
         bullet_courbe.mouvement_courbe()
-    jeu.joueur.all_bullets_courbe.draw(screen)
+    jeu.joueur.all_bombe.draw(screen)
 
     # Afficher l'image des monstres
     jeu.all_monstres.draw(screen)
@@ -67,17 +78,15 @@ while game_running:
 
         # Si le joueur appuie sur une touche
         elif event.type == pygame.KEYDOWN:
-            # Si le joueur appuie sur D
-            if event.key == pygame.K_d and jeu.joueur.rect.x < 1092:
-                jeu.joueur.move_right()
-                print("Déplacement vers la droite")
-            # Si le joueur appuie sur Q
-            elif event.key == pygame.K_q and jeu.joueur.rect.x > 0:
-                jeu.joueur.move_left()
-                print("Déplacement vers la gauche")
+            jeu.key_pressed[event.key] = True
             # Si le joueur appuie sur ESP
-            elif event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE:
                 jeu.joueur.lancement(jeu)
             # Si le joueur appuie sur ENTER
             elif event.key == pygame.K_RETURN:
-                jeu.joueur.lancement_courbe()
+                jeu.joueur.lancement_bombe(jeu)
+
+        elif event.type == pygame.KEYUP:
+            jeu.key_pressed[event.key] = False
+
+

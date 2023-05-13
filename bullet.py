@@ -32,6 +32,9 @@ class Bullet(pygame.sprite.Sprite):     # Munitions sans trajectoire
         if not self.jeu.check_collision(self, self.jeu.all_monstres):
             self.rect.x += self.vitesse
 
+        if self.jeu.check_collision(self, self.jeu.all_monstres):
+            self.joueur.all_bullets.remove(self)
+
         # Si les munitions sortent de la fenêtre
         if self.rect.x > 1200:
             self.joueur.all_bullets.remove(self)
@@ -39,9 +42,9 @@ class Bullet(pygame.sprite.Sprite):     # Munitions sans trajectoire
 
 
 
-class Bullet_courbe(pygame.sprite.Sprite):     # Munitions avec trajectoire
+class Bombe(pygame.sprite.Sprite):     # Munitions avec trajectoire
 
-    def __init__(self, joueur):
+    def __init__(self, joueur, jeu):
         super().__init__()
 
         # Statistiques des munitions
@@ -52,16 +55,17 @@ class Bullet_courbe(pygame.sprite.Sprite):     # Munitions avec trajectoire
         self.image = pygame.image.load("assets/bombe.png")
         self.image = pygame.transform.scale(self.image, (37, 37))
         self.rect = self.image.get_rect()
-        # Positions
         self.rect.x = joueur.rect.x + 108
         self.rect.y = joueur.rect.y - 6
 
-        self.joueur = joueur  # Pour pourvoir utiliser la class joueur dans la fonction mouvement_courbe()
+        self.joueur = joueur  # Pour pourvoir utiliser la class joueur dans la fonction mouvement()
+        self.jeu = jeu  # Pour pourvoir utiliser la class jeu dans la fonction mouvement()
 
 
     # Fonctions
 
     def mouvement_courbe(self):
+        """
         # Convertir l'angle en radians
         theta = numpy.radians(self.angle)
         # Accélération due à la gravité (en m/s^2)
@@ -70,9 +74,15 @@ class Bullet_courbe(pygame.sprite.Sprite):     # Munitions avec trajectoire
         self.time += 0.1
         # Mettre à jour les coordonnées x et y
         self.rect.x = self.vitesse * self.time * numpy.cos(theta) + 100
-        self.rect.y = self.vitesse * self.time * numpy.sin(theta) - 0.5 * g * self.time ** 2 + 200
+        self.rect.y = self.vitesse * self.time * numpy.sin(theta) - 0.5 * g * self.time ** 2 + 200"""
+
+        if not self.jeu.check_collision(self, self.jeu.all_monstres):
+            self.rect.x += self.vitesse
+
+        if self.jeu.check_collision(self, self.jeu.all_monstres):
+            self.joueur.all_bombe.remove(self)
 
         # Si les munitions sortent de la fenêtre
         if self.rect.x > 1200 or self.rect.y > 800:
-            self.joueur.all_bullets_courbe.remove(self)
+            self.joueur.all_bombe.remove(self)
             print("La munition courbe a été supprimé")
