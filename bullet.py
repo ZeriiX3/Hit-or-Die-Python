@@ -46,6 +46,7 @@ class Bullet_courbe(pygame.sprite.Sprite):     # Munitions avec trajectoire
 
         # Statistiques des munitions
         self.vitesse = 5
+        self.angle = 45
         self.time = 0
         # Charger l'image des munitions
         self.image = pygame.image.load("assets/bombe.png")
@@ -64,12 +65,12 @@ class Bullet_courbe(pygame.sprite.Sprite):     # Munitions avec trajectoire
         # Convertir l'angle en radians
         theta = numpy.radians(self.angle)
         # Accélération due à la gravité (en m/s^2)
-        g = 9.81
+        g = -9.81
         # Augmenter le temps
         self.time += 0.1
         # Mettre à jour les coordonnées x et y
-        self.rect.x = self.vitesse * self.time * numpy.cos(theta)
-        self.rect.y = self.vitesse * self.time * numpy.sin(theta) - 0.5 * g * self.time ** 2
+        self.rect.x = self.vitesse * self.time * numpy.cos(theta) + 100
+        self.rect.y = self.vitesse * self.time * numpy.sin(theta) - 0.5 * g * self.time ** 2 + 200
 
         # Si les munitions sortent de la fenêtre
         if self.rect.x > 1200 or self.rect.y > 800:
