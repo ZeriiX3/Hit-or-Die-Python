@@ -36,11 +36,11 @@ class Bullet(pygame.sprite.Sprite):     # Munitions sans trajectoire
         for monster in self.jeu.check_collision(self, self.jeu.all_monstres):
             self.joueur.all_bullets.remove(self)
             # Dégats infligés aux monstres
-            monster.damage(1)
+            monster.damage(7)
 
         for boss in self.jeu.check_collision(self, self.jeu.all_boss):
             self.joueur.all_bullets.remove(self)
-            boss.damage(3)
+            boss.damage(7)
 
         # Si les munitions sortent de la fenêtre
         if self.rect.x > 1200:
@@ -85,11 +85,11 @@ class Bombe(pygame.sprite.Sprite):     # Munitions avec trajectoire
 
         for monster in self.jeu.check_collision(self, self.jeu.all_monstres):
             self.joueur.all_bombe.remove(self)
-            monster.damage(5)
+            monster.damage(20)
 
         for boss in self.jeu.check_collision(self, self.jeu.all_boss):
             self.joueur.all_bombe.remove(self)
-            boss.damage(15)
+            boss.damage(20)
 
         # Si les munitions sortent de la fenêtre
         if self.rect.x > 1200 or self.rect.y > 800:

@@ -50,3 +50,7 @@ class Joueur(pygame.sprite.Sprite):
             bombe = Bombe(self, jeu)
             self.all_bombe.add(bombe)
             self.next_execution_time = current_time + self.delai+800
+
+    def clear_bullets(self):
+        self.all_bullets.empty()
+        self.all_bombe.empty()
