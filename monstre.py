@@ -116,6 +116,7 @@ class Boss(pygame.sprite.Sprite):
             self.kill()
 
             print("Vous avez tué le monstre")
+            self.jeu.score += 20
 
     ############################# MOUVEMENT #############################
 
