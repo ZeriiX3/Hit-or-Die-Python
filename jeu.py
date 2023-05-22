@@ -37,7 +37,7 @@ class Jeu:
         self.spawned_after_boss = False
 
         self.start_time = pygame.time.get_ticks()
-        self.timer = 40
+        self.timer = 35
 
 
 

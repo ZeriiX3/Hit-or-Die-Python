@@ -104,14 +104,14 @@ class Boss(pygame.sprite.Sprite):
         # Couleur du fond de la barre de vie du monstre
         hp_bar_bg_color = (88, 24, 69)  # Gris foncé
         # Position du fond de la barre de vie
-        hp_bar_bg_position = [self.rect.x - 60, self.rect.y - 15, self.hp_max, 6]
+        hp_bar_bg_position = [self.rect.x - 70, self.rect.y - 20, self.hp_max, 6]
         # Afficher l'image fond de la barre de vie
         pygame.draw.rect(rectangle, hp_bar_bg_color, hp_bar_bg_position)
 
         # Couleur de la barre de vie du monstre
         hp_bar_color = (255, 0, 0)  # Rouge
         # Position de la barre de vie
-        hp_bar_position = [self.rect.x - 60, self.rect.y - 15, self.hp, 6]
+        hp_bar_position = [self.rect.x - 70, self.rect.y - 20, self.hp, 6]
         # Afficher l'image de la barre de vie
         pygame.draw.rect(rectangle, hp_bar_color, hp_bar_position)
 
