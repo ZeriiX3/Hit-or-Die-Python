@@ -60,11 +60,16 @@ while game_running:
         monstre.check_hp(screen)
         monstre.mouvement()
     jeu.all_monstres.draw(screen)
-
+    
+    # Affichage l'image des boss
     for boss in jeu.all_boss:
         boss.check_hp(screen)
         boss.mouvement()
     jeu.all_boss.draw(screen)
+    
+    # Affichage du score
+    jeu.update_score(screen)
+    
 
     # Mise à jour de l'écran
     pygame.display.flip()
