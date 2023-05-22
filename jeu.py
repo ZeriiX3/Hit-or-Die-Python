@@ -34,7 +34,11 @@ class Jeu:
         # Touches
         self.key_pressed = {}
 
-
+        # Score à 0
+        self.score = 0
+        
+        
+        
     # Fonctions
 
     def spawn_monstre(self):
@@ -49,3 +53,10 @@ class Jeu:
     # Gestion des collisions
     def check_collision(self, element, group_element):
         return pygame.sprite.spritecollide(element, group_element, False, pygame.sprite.collide_mask)
+    
+    # Affichage du score
+    def update_score(self, screen):
+        font = pygame.font.SysFont("monospace", 16)
+        score_text = font.render(f"Score : {self.score}", 1, (255, 255, 255 ))
+        screen.blit(score_text, (20, 20))
+    
