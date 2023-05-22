@@ -6,7 +6,7 @@ import random as rd
 # MONSTRES
 
 class Monstre(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, jeu):
         super().__init__()
         self.hp = 100
         self.hp_max = 100
@@ -17,6 +17,8 @@ class Monstre(pygame.sprite.Sprite):
         self.rect.x = 800 + rd.randint(-300, 300)
         self.rect.y = 190 + rd.randint(-100, 300)
         self.direction = []
+        
+        self.jeu = jeu  # Pour pourvoir utiliser la class jeu dans la fonction damage()
 
 
     # Fonctions
